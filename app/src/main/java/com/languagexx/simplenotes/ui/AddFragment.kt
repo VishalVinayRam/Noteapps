@@ -23,7 +23,6 @@ class AddFragment : DaggerFragment() {
     lateinit var noteViewModel: NoteViewModel
 
 
-    // Method #1
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,7 +31,6 @@ class AddFragment : DaggerFragment() {
         return inflater.inflate(R.layout.fragment_add, container, false)
     }
 
-    // Method #2
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,22 +41,8 @@ class AddFragment : DaggerFragment() {
         }
     }
 
-    // Method #3
-    private fun saveNoteToDatabase() {
+=    private fun saveNoteToDatabase() {
 
-        //Save Notes WHEN app is minimized or back button is clicked [#onPause method will be called]
-        //Save Notes WHEN save button is cliked
-
-
-        /* VALIDATIONS FOR SAVING NOTES
-
-        1)  if TITLE IS NULL -- Title = "Empty Title"
-
-        2)  if all the property of notes is null i.e title , description , color and tag
-        then note will note will saved
-        show toast "Note is discarded"
-
-         */
 
         (activity as MainActivity?)?.showFloatingButton()
 
@@ -70,14 +54,12 @@ class AddFragment : DaggerFragment() {
 
     }
 
-    // Method #4
     override fun onDestroyView() {
         super.onDestroyView()
         saveNoteToDatabase()
     }
 
 
-    // Method #5
     private fun saveNote() {
         val note = Note(0,addTitle.text.toString(),addDescription.text.toString(),addTag.text.toString())
 
@@ -94,7 +76,6 @@ class AddFragment : DaggerFragment() {
         }
     }
 
-    // Method #6
     fun validations(): Boolean {
         return !(addTitle.text.isNullOrEmpty()
                 && addDescription.text.isNullOrEmpty()
@@ -102,7 +83,6 @@ class AddFragment : DaggerFragment() {
     }
 
 
-    // Method #7
     private fun setupViewModel() {
         noteViewModel = ViewModelProvider(this,viewmodelProviderFactory).get(NoteViewModel::class.java)
     }
